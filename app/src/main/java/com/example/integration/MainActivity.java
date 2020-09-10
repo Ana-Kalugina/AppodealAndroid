@@ -12,11 +12,13 @@ import androidx.multidex.MultiDex;
 
 import com.appodeal.ads.Appodeal;
 import com.appodeal.ads.BannerCallbacks;
+import com.appodeal.ads.NativeAd;
 import com.appodeal.ads.NativeAdView;
 import com.appodeal.ads.RewardedVideoCallbacks;
 import com.appodeal.ads.api.App;
 import com.appodeal.ads.utils.Log;
 
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -116,10 +118,15 @@ public class MainActivity extends AppCompatActivity {
 
     public void showNative() {
         Appodeal.hide(this,Appodeal.BANNER_TOP);
-        Appodeal.cache(this, Appodeal.NATIVE, 4);
-        Appodeal.isLoaded(Appodeal.NATIVE);
-        //Appodeal.getNativeAds(int ammount);
-        Appodeal.show(this,Appodeal.NATIVE);
+        setContentView(R.layout.activity_main2);
+        if(Appodeal.isLoaded(Appodeal.NATIVE)){
+            //Получаем список-контейнер из одного элемента нативной рекламы
+            List<NativeAd> nativeAdsList = Appodeal.getNativeAds(1);
+            // получаем сам объект нативной рекламы по 0 индексу из списка, т.е самый первый (в нашем случае и последний, т.к мы задали список из одного элемента)
+            NativeAd nativeAd=nativeAdsList.get(0);
+            //а далее нам нужно засетапить вью для нативки
+        }
+
     }
 
 
